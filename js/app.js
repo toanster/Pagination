@@ -1,3 +1,4 @@
+let container = document.querySelector('.page');
 let listLi = document.querySelectorAll('.student-list > li');
 let list = document.querySelector('.student-list');
 let userName = document.querySelectorAll('.student-list > li > div > h3');
@@ -5,7 +6,7 @@ let userEmail = document.querySelectorAll('.student-list > li > div > .email');
 let pageHeader = document.querySelector('.page-header');
 let numMaxShow = 10;
 let pagesTotal = Math.ceil(listLi.length / numMaxShow);
-let pageNum = document.querySelector('.pagination');
+//let pageNum = document.querySelector('.pagination');
 let pageActive = 1;
 const maxLi = listLi.length-1;
 const searchRepeat = 0;
@@ -22,7 +23,9 @@ let searchTerm = pageHeader.appendChild(divSearch);
 function searchStudent(searchTerm){
   let itemsFound = 0;
   for (var i = 0; i < listLi.length; i++) {
-      if(userName[i].innerHTML.indexOf(searchTerm) === 0 || userEmail[i].innerHTML.indexOf(searchTerm) === 0){
+      console.log(userName[i].textContent.includes(searchTerm));
+      if(userName[i].textContent.includes(searchTerm) || userEmail[i].textContent.includes(searchTerm)){
+
         listLi[i].style.display = 'block';
         itemsFound++;
         document.querySelector('.divNotFound').style.display = 'none';
@@ -102,6 +105,9 @@ function setActivePage(){
 
 
 // addPagination
+let DivPageNum = document.createElement('div');
+DivPageNum.setAttribute('class','pagination');
+let pageNum = container.appendChild(DivPageNum);
 addPagination();
 
 // Reload list
